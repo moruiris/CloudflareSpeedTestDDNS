@@ -15,8 +15,8 @@ case $IP_SELECT in
         ;;
 esac
 
-source ./cf_ddns/3_cf_ddns_cloudflare.sh
+source ./cf_ddns/3_ddns_cloudflare.sh
 
-source ./cf_ddns/4_cf_push.sh
+source ./cf_ddns/4_push.sh
 
 exit 0;
