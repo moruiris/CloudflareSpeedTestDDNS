@@ -18,7 +18,7 @@ current_attempt=1
 while [ $current_attempt -le $max_attempts ]
 do
     # 下载文件
-    wget "${download_url}" -O $save_path
+    wget ${download_url} -O $save_path
 
     # 检查是否下载成功
     if [ $? -eq 0 ]; then
