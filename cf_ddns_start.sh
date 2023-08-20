@@ -1,8 +1,4 @@
 #!/bin/bash
-# 一开始选择在哪里运行命令
-if [ -e ${informlog} ]; then
-    cd $work_dir
-fi
 
 source config.conf;
 
