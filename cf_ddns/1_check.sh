@@ -7,11 +7,26 @@ PROXY=https://ghproxy.com/
 flag_file=".ran_before"
 CloudflareST="./cf_ddns/CloudflareST"
 informlog="./cf_ddns/informlog"
-cf_push="./cf_ddns/cf_push.sh"
+cf_push="./cf_ddns/4_push.sh"
 
 # 初始化推送
 if [ -e ${informlog} ]; then
   rm ${informlog}
+fi
+# 检测是否配置DDNS
+if [[ -z ${api_key} ]]; then
+  IP_TO_CF=0
+else
+  IP_TO_CF=1
+fi
+
+if [ $IP_TO_CF -eq 1 ];then
+  echo "配置获取成功！"
+else
+  echo "cf_ddns未配置！！！"
+  echo "cf_ddns未配置！！！" > $informlog
+  source $cf_push;
+  exit 1;
 fi
 
 # 如果是第一次运行的话，将进行初始化
