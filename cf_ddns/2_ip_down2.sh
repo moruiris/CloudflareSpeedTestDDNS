@@ -5,8 +5,8 @@ if [ -e ./cf_ddns/tmp/ ]; then
 	rm -rf ./cf_ddns/tmp/
 fi
 
-if [ "$IP_SELECT" = "1" ]; then
-	echo "下载cf官方ip文件"
+if [ "$IP_SELECT" = "2" ]; then
+	echo "下载cf反代ip文件"
 	if [ ! -d ./cf_ddns/tmp ]; then
 		mkdir ./cf_ddns/tmp
 	fi
