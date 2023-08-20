@@ -55,4 +55,3 @@ else
     echo "Merged text files containing '-1-443.txt' moved and renamed as 'ip.txt' in ./cf_ddns."
 fi
 rm -rf ./cf_ddns/tmp/
-fi
