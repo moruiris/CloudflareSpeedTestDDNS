@@ -1,7 +1,19 @@
 #!/bin/bash
 #         用于CloudflareSpeedTestDDNS运行环境检测和必要软件初始化安装。
 
+#github下在CloudflareSpeedTest使用ghproxy代理
+PROXY=https://ghproxy.com/
+
 flag_file=".ran_before"
+CloudflareST="./cf_ddns/CloudflareST"
+informlog="./cf_ddns/informlog"
+cf_push="./cf_ddns/cf_push.sh"
+
+# 初始化推送
+if [ -e ${informlog} ]; then
+  rm ${informlog}
+fi
+
 # 如果是第一次运行的话，将进行初始化
 if [ ! -e "$flag_file" ]; then
 	# 初始化包列表
@@ -95,17 +107,20 @@ if [ ! -e "$flag_file" ]; then
 	        sudo yum install $packages -y
 	    else
 	        echo "未能检测出你的系统：$(uname)，请自行安装$packages这些软件。"
+	        echo "未能检测出你的系统：$(uname)，请自行安装$packages这些软件。" > $informlog
+	        source $cf_push;
 	        exit 1
 	    fi
 	fi
- 
 # 检测CloudflareST是否安装
-CloudflareST="./cf_ddns/CloudflareST"
 LATEST_URL=https://api.github.com/repos/XIU2/CloudflareSpeedTest/releases/latest
+
 latest_version() {
   curl --silent $LATEST_URL | grep "tag_name" | cut -d '"' -f 4
 }
+
 VERSION=$(latest_version)
+
 if [ -e ./cf_ddns/tmp/ ]; then
 	rm -rf ./cf_ddns/tmp/
 fi
@@ -134,10 +149,11 @@ if [ ! -f ${CloudflareST} ]; then
 	    rm -rf ./cf_ddns/tmp/
 	else
 	    echo "找不到匹配的CloudflareST程序，请自行下载'https://github.com/XIU2/CloudflareSpeedTest'，并解压至'./cf_ddns/'文件夹中。"
+	    echo "找不到匹配的CloudflareST程序，请自行下载'https://github.com/XIU2/CloudflareSpeedTest'，并解压至'./cf_ddns/'文件夹中。" > $informlog
+	    source $cf_push;
 	    exit 1
 	fi
 fi
-
 # 检测CloudflareST权限
 if [[ ! -x ${CloudflareST} ]]; then
 #   echo "${CloudflareST} 文件不可执行"
