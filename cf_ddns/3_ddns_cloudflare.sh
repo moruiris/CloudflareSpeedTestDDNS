@@ -79,7 +79,11 @@ if [[ -n "$CFST_STM" ]]; then
   CFST_STM="-httping $httping_code $cfcolo"
 fi
 
-if [ "$IP_ADDR" = "ipv6" ] ; then
+if [ "$IP_PR_IP" = "true" ] ; then
+  curl -sSf -o ./cf_ddns/pr_ip.txt https://cf.vbar.fun/pr_ip.txt
+  $CloudflareST $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -tl $CFST_TL  -sl $CFST_SL -p $CFST_P -tlr $CFST_TLR $CFST_STM -f ./cf_ddns/pr_ip.txt -o ./cf_ddns/result.csv
+  rm ./cf_ddns/pr_ip.txt
+elif [ "$IP_ADDR" = "ipv6" ] ; then
   #开始优选IPv6
   $CloudflareST $CFST_URL_R -t $CFST_T -n $CFST_N -dn $CFST_DN -tl $CFST_TL -tll $CFST_TLL -sl $CFST_SL -p $CFST_P -tlr $CFST_TLR $CFST_STM -f ./cf_ddns/ipv6.txt -o ./cf_ddns/result.csv
 else
