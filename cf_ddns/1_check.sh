@@ -1,9 +1,6 @@
 #!/bin/bash
 #         用于CloudflareSpeedTestDDNS运行环境检测和必要软件初始化安装。
 
-#github下在CloudflareSpeedTest使用ghproxy代理加速下载文件
-PROXY=https://ghproxy.com/
-
 flag_file=".ran_before"
 # 如果是第一次运行的话，将进行初始化
 if [ ! -e "$flag_file" ]; then
