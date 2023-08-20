@@ -23,7 +23,7 @@ hostname=()
 # --cloudflare账号邮箱--
 x_email=
 #
-# --空间ID--
+# --区域ID--
 zone_id=
 #
 # --Global API Key--
