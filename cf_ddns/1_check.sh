@@ -4,6 +4,7 @@
 #github下在CloudflareSpeedTest使用ghproxy代理加速下载文件
 PROXY=https://ghproxy.com/
 
+flag_file=".ran_before"
 # 如果是第一次运行的话，将进行初始化
 if [ ! -e "$flag_file" ]; then
 	# 初始化包列表
@@ -97,8 +98,6 @@ if [ ! -e "$flag_file" ]; then
 	        sudo yum install $packages -y
 	    else
 	        echo "未能检测出你的系统：$(uname)，请自行安装$packages这些软件。"
-	        echo "未能检测出你的系统：$(uname)，请自行安装$packages这些软件。" > $informlog
-	        source $cf_push;
 	        exit 1
 	    fi
 	fi
@@ -138,8 +137,6 @@ if [ ! -f ${CloudflareST} ]; then
 	    rm -rf ./cf_ddns/tmp/
 	else
 	    echo "找不到匹配的CloudflareST程序，请自行下载'https://github.com/XIU2/CloudflareSpeedTest'，并解压至'./cf_ddns/'文件夹中。"
-	    echo "找不到匹配的CloudflareST程序，请自行下载'https://github.com/XIU2/CloudflareSpeedTest'，并解压至'./cf_ddns/'文件夹中。" > $informlog
-	    source $cf_push;
 	    exit 1
 	fi
 fi
