@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ -n $workdir ]]; then
+    cd $workdir
+fi
+
 source config.conf;
 
 source ./cf_ddns/1_check.sh
