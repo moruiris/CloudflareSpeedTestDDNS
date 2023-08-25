@@ -1,7 +1,6 @@
 # CloudflareSpeedTestDDNS
 
-###
-两种主命令任选其一
+###两种主命令任选其一
 - cf_ddns_start.sh
 - cf_ddns/0_start.sh
 
