@@ -28,8 +28,9 @@ else
   exit 1;
 fi
 
-# 如果是第一次运行的话，将进行初始化
-if [ "$flag" = "1" ]; then
+# 如果是开机第一次运行的话，将进行初始化；或者强制运行初始化
+flag_file="/tmp/.ran_before"
+if [ ! -e "$flag_file" ] || [ "$flag" = "1" ]; then	
 	# 初始化包列表
 	packages=""
 
@@ -47,14 +48,6 @@ if [ "$flag" = "1" ]; then
 	    packages="$packages jq"
 	else
 	    echo "jq is already installed."
-	fi
-
-	# 检查coreutils-timeout是否安装
-	if ! command -v coreutils-timeout &> /dev/null; then
-	    echo "coreutils-timeout not found. Adding to the list of required packages."
-	    packages="$packages coreutils-timeout"
-	else
-	    echo "coreutils-timeout is already installed."
 	fi
 	
 	# 检查wget是否安装
@@ -78,8 +71,9 @@ if [ "$flag" = "1" ]; then
 	    echo "tar not found. Adding to the list of required packages."
 	    packages="$packages tar"
 	else
+	    #由于有的设备有tar但版本过低还是无法正常解压，所以tar强制更新
+	    packages="$packages tar"
 	    echo "tar is already installed."
-	fi
 	
 	# 检查sed是否安装
 	if ! command -v sed &> /dev/null; then
@@ -116,6 +110,8 @@ if [ "$flag" = "1" ]; then
 	        echo "Installing packages using opkg..."
 	        opkg update
 	        opkg install $packages
+	        #openwrt没有安装timeout
+	        opkg install coreutils-timeout
 	    elif grep -qi "ubuntu\|debian" /etc/os-release; then
 	        echo "Installing packages using apt-get..."
 	        sudo apt-get update
@@ -177,6 +173,7 @@ if [ "$flag" = "1" ]; then
 		echo "${CloudflareST} 文件不可执行,添加权限"
    		chmod +x $CloudflareST
 	fi
+	touch "$flag_file"
 	echo "初始化完成！"
 else
 	echo "没有进行初始化！"
