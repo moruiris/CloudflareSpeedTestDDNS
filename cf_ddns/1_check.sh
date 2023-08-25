@@ -74,7 +74,8 @@ if [ ! -e "$flag_file" ] || [ "$flag" = "1" ]; then
 	    #由于有的设备有tar但版本过低还是无法正常解压，所以tar强制更新
 	    packages="$packages tar"
 	    echo "tar is already installed."
-	
+	fi
+ 
 	# 检查sed是否安装
 	if ! command -v sed &> /dev/null; then
 	    echo "sed not found. Adding to the list of required packages."
