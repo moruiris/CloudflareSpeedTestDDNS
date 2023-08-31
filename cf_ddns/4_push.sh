@@ -1,7 +1,7 @@
 #!/bin/bash
 ##用于CloudflareSpeedTestDDNS执行情况推送。
 
-echo "TG将推送的内容如下："
+echo "TG将推送的内容如下：";
 
 cat $informlog
 
