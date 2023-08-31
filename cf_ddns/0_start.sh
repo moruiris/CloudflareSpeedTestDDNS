@@ -1,5 +1,5 @@
 #!/bin/bash
-##版本：V1.2
+##版本：V1.3
 	#主程序为0_start.sh。
  
 ###################################################################################################
@@ -20,11 +20,12 @@ flag=
 IP_ADDR=ipv4
 #
 # --使用ip文件选择--
-# 每次运行本脚本都自动重新拉取
 #	CF官方ip地址调用https://github.com/XIU2/CloudflareSpeedTest/releases。
 #	CF反代ip地址调用https://zip.baipiao.eu.org。
-# IP_SELECT=1 调用官方ip；IP_SELECT=2 调用反代ip。默认反代ip
-IP_SELECT=2
+#	IP_SELECT=1 调用官方ip；IP_SELECT=2 调用反代ip。默认官方ip
+IP_SELECT=1
+#	是否每次运行脚本进行ip地址更新。IP_UPDATE=1，是;不填，不更新。
+IP_UPDATE=
 #
 # --填写需要DDNS的完整域名--
 #	支持多域名:域名需要填写在括号中，每个域名之间用“空格”相隔。
