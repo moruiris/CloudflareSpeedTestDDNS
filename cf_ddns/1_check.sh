@@ -174,6 +174,12 @@ if [ ! -e "$flag_file" ] || [ "$flag" = "1" ]; then
 		echo "${CloudflareST} 文件不可执行,添加权限"
    		chmod +x $CloudflareST
 	fi
+	if [ ! -f ./cf_ddns/ip1/ip.txt ]; then
+		source ./cf_ddns/2_ip_down1.sh
+	fi
+	if [ ! -f ./cf_ddns/ip2/ip.txt ]; then
+		source ./cf_ddns/2_ip_down2.sh
+	fi
 	touch "$flag_file"
 	echo "初始化完成！"
 else
