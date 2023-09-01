@@ -56,7 +56,8 @@ if [ "$IP_UPDATE" = "1" ] || [ ! -f ./cf_ddns/ip2/ip.txt ]; then
     		echo "Merged text files containing '-1-443.txt' moved and renamed as 'ip.txt' in ./cf_ddns/ip2."
 	fi
 	rm -rf ./cf_ddns/tmp/
-	if [ "$IP_SELECT" = "2" ]; then
-		cp -f ./cf_ddns/ip2/ip.txt ./cf_ddns/
-	fi
+fi
+
+if [ "$IP_SELECT" = "2" ]; then
+	cp -f ./cf_ddns/ip2/ip.txt ./cf_ddns/
 fi
