@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source config.conf
+
 if [[ -n $workdir ]]; then
     cd $workdir
 fi
